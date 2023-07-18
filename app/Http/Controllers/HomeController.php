@@ -26,21 +26,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function calendar()
-    {
-        $all_events = Event::all();
-
-        $events = [];
-
-        foreach ($all_events as $event) {
-            $events[] = [
-                'title' => $event->event,
-                'start' => $event->start_date,
-                'end' => $event->end_date,
-
-            ];
-        }
-
-        return view('calendar', compact('events'));
-    }
 }

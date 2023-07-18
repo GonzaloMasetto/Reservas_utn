@@ -31,5 +31,5 @@
 
         calendar.render();
     });
-</script>
+</script> 
 @endpush

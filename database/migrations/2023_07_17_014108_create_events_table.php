@@ -16,8 +16,16 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('event');
+            $table->string('contenido');
             $table->datetime('start_date');
             $table->datetime('end_date');
+            
+            $table->unsignedBigInteger('blog_id')->nullable();
+            
+            $table->foreign('blog_id')
+                    ->references('id')->on('blogs')
+                    ->onDelete('set null');
+
             $table->timestamps();
         });
     }

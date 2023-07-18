@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 //agregamos el modelo de permisos de spatie
 use Spatie\Permission\Models\Permission;
 
+
 class SeederTablaPermisos extends Seeder
 {
     /**
@@ -27,7 +28,19 @@ class SeederTablaPermisos extends Seeder
             'ver-blog',
             'crear-blog',
             'editar-blog',
-            'borrar-blog'
+            'borrar-blog',
+
+            //Operacions sobre tabla events
+            'ver-event',
+            'crear-event',
+            'editar-event',
+            'borrar-event',
+
+            //Operacions sobre tabla usuarios
+            'ver-usuario',
+            'crear-usuario',
+            'editar-usuario',
+            'borrar-usuario'
         ];
 
         foreach($permisos as $permiso) {

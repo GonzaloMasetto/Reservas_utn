@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Blogs</h3>
+            <h3 class="page__heading">Events</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -12,40 +12,37 @@
                         <div class="card-body">
                 
             
-                        @can('crear-blog')
-                        <a class="btn btn-warning" href="{{ route('blogs.create') }}">Nuevo</a>
+                        @can('crear-event')
+                        <a class="btn btn-warning" href="{{ route('events.create') }}">Nuevo</a>
                         @endcan
             
                         <table class="table table-striped mt-2">
                                 <thead style="background-color:#6777ef">                                     
                                     <th style="display: none;">ID</th>
-                                    <th style="color:#fff;">Titulo</th>
+                                    <th style="color:#fff;">Event</th>
                                     <th style="color:#fff;">Contenido</th>                                    
                                     <th style="color:#fff;">Acciones</th>
                                     <th style="color:#fff;">Calendario</th>                                                                   
                               </thead>
                               <tbody>
-                            @foreach ($blogs as $blog)
+                            @foreach ($events as $event)
                             <tr>
-                                <td style="display: none;">{{ $blog->id }}</td>                                
-                                <td>{{ $blog->titulo }}</td>
-                                <td>{{ $blog->contenido }}</td>
+                                <td style="display: none;">{{ $event->id }}</td>                                
+                                <td>{{ $event->event }}</td>
+                                <td>{{ $event->contenido }}</td>
+                                <td>{{ $event->start_date }}</td>
+                                <td>{{ $event->end_date }}</td>
                                 <td>
-                                    <form action="{{ route('blogs.destroy',$blog->id) }}" method="POST">                                        
-                                        @can('editar-blog')
-                                        <a class="btn btn-info" href="{{ route('blogs.edit',$blog->id) }}">Editar</a>
+                                    <form action="{{ route('events.destroy',$event->id) }}" method="POST">                                        
+                                        @can('editar-event')
+                                        <a class="btn btn-info" href="{{ route('events.edit',$event->id) }}">Editar</a>
                                         @endcan
 
                                         @csrf
                                         @method('DELETE')
-                                        @can('borrar-blog')
+                                        @can('borrar-event')
                                         <button type="submit" class="btn btn-danger">Borrar</button>
                                         @endcan
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>                                      
-                                        <a class="btn btn-info" href="{{ route('blogs.calendar', ['blog' => $blog->id]) }}">Ver Calendario</a>
                                     </form>
                                 </td>
                             </tr>
@@ -55,7 +52,7 @@
 
                         <!-- Ubicamos la paginacion a la derecha -->
                         <div class="pagination justify-content-end">
-                            {!! $blogs->links() !!}
+                            {!! $events->links() !!}
                         </div>
                         </div>
                     </div>

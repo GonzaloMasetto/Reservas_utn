@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Blog;
+use App\Models\Event;
 
 class BlogController extends Controller
 {
@@ -78,6 +79,8 @@ class BlogController extends Controller
         return view('blogs.editar',compact('blog'));
     }
 
+    
+
     /**
      * Update the specified resource in storage.
      *
@@ -108,5 +111,24 @@ class BlogController extends Controller
         $blog->delete();
     
         return redirect()->route('blogs.index');
+    }
+
+    public function calendar(Blog $blog)
+    {
+        $all_events = Event::where('blog_id', $blog->id)->get();
+
+        $events = [];
+
+        foreach ($all_events as $event) {
+            
+            $events[] = [
+                'title' => $event->event,
+                'start' => $event->start_date,
+                'end' => $event->end_date,
+
+            ];
+        }
+
+        return view('blogs.calendar', compact('events'));
     }
 }
