@@ -131,4 +131,23 @@ class BlogController extends Controller
 
         return view('blogs.calendar', compact('events'));
     }
+
+    public function events(Blog $blog)
+    {
+        $all_events = Event::where('blog_id', $blog->id)->get();
+
+        $events = [];
+
+        foreach ($all_events as $event) {
+            
+            $events[] = [
+                'title' => $event->event,
+                'start' => $event->start_date,
+                'end' => $event->end_date,
+
+            ];
+        }
+
+        return response()->json($events);
+    }
 }

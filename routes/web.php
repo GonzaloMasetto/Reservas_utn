@@ -27,6 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 
+
 //y creamos un grupo de rutas protegidas para los controladores
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RolController::class);
@@ -34,5 +35,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('blogs', BlogController::class);
     Route::resource('events', EventController::class);
     Route::get('/blogs/{blog}/calendar', [App\Http\Controllers\BlogController::class, 'calendar'])->name('blogs.calendar');
-
+    Route::get('/blogs/{blog}/events', [App\Http\Controllers\BlogController::class, 'events'])->name('blogs.events');
 });

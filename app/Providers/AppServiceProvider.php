@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 //Para la paginacion
 use Illuminate\Pagination\Paginator;
+//para que escuche el evento
+use App\Observers\AssignRoleToUser;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {

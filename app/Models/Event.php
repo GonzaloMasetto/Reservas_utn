@@ -14,4 +14,5 @@ class Event extends Model
     public function blog(){
         return $this->belongsTo('App\Models\Blog');
     }
+    
 }
