@@ -31,6 +31,10 @@
                                    <label for="event">Event</label>
                                    <input type="text" name="event" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                   <label for="event">Nombre y Apellido</label>
+                                   <input type="text" name="event" class="form-control">
+                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="blog_id">Blog</label>
