@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Blogs</h3>
+            <h3 class="page__heading">Places</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -12,8 +12,8 @@
                         <div class="card-body">
                 
             
-                        @can('crear-blog')
-                        <a class="btn btn-warning" href="{{ route('blogs.create') }}">Nuevo</a>
+                        @can('crear-place')
+                        <a class="btn btn-warning" href="{{ route('places.create') }}">Nuevo</a>
                         @endcan
             
                         <table class="table table-striped mt-2">
@@ -25,27 +25,27 @@
                                     <th style="color:#fff;">Calendario</th>                                                                   
                               </thead>
                               <tbody>
-                            @foreach ($blogs as $blog)
+                            @foreach ($places as $place)
                             <tr>
-                                <td style="display: none;">{{ $blog->id }}</td>                                
-                                <td>{{ $blog->titulo }}</td>
-                                <td>{{ $blog->contenido }}</td>
+                                <td style="display: none;">{{ $place->id }}</td>                                
+                                <td>{{ $place->titulo }}</td>
+                                <td>{{ $place->contenido }}</td>
                                 <td>
-                                    <form action="{{ route('blogs.destroy',$blog->id) }}" method="POST">                                        
-                                        @can('editar-blog')
-                                        <a class="btn btn-info" href="{{ route('blogs.edit',$blog->id) }}">Editar</a>
+                                    <form action="{{ route('places.destroy',$place->id) }}" method="POST">                                        
+                                        @can('editar-place')
+                                        <a class="btn btn-info" href="{{ route('places.edit',$place->id) }}">Editar</a>
                                         @endcan
 
                                         @csrf
                                         @method('DELETE')
-                                        @can('borrar-blog')
+                                        @can('borrar-place')
                                         <button type="submit" class="btn btn-danger">Borrar</button>
                                         @endcan
                                     </form>
                                 </td>
                                 <td>
                                     <form>                                      
-                                        <a class="btn btn-info" href="{{ route('blogs.calendar', ['blog' => $blog->id]) }}">Ver Calendario</a>
+                                        <a class="btn btn-info" href="{{ route('places.calendar', ['place' => $place->id]) }}">Ver Calendario</a>
                                     </form>
                                 </td>
                             </tr>
@@ -55,7 +55,7 @@
 
                         <!-- Ubicamos la paginacion a la derecha -->
                         <div class="pagination justify-content-end">
-                            {!! $blogs->links() !!}
+                            {!! $places->links() !!}
                         </div>
                         </div>
                     </div>

@@ -8,10 +8,13 @@
     <a class="nav-link" href="/roles">
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a>
-    <a class="nav-link" href="/blogs">
-        <i class=" fas fa-blog"></i><span>Lugares</span>
+    <a class="nav-link" href="/places">
+        <i class=" fas fa-place"></i><span>Lugares</span>
     </a>
     <a class="nav-link" href="/events">
-        <i class=" fas fa-blog"></i><span>Eventos</span>
+        <i class=" fas fa-place"></i><span>Eventos</span>
+    </a>
+    <a class="nav-link" href="/typeEvents">
+        <i class=" fas fa-place"></i><span>Tipo de Eventos</span>
     </a>
 </li>

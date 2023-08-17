@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Editar Event</h3>
+            <h3 class="page__heading">Editar Place</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -31,36 +31,18 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                    <label for="titulo">Título</label>
-                                   <input type="text" name="titulo" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="start_date">Fecha y Hora de Inicio</label>
-                                    <input type="datetime-local" name="start_date" class="form-control">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="end_date">Fecha y Hora de Fin</label>
-                                    <input type="datetime-local" name="end_date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <label for="titulo">Place</label>
-                                    <select name="place_id" class="form-control">
-                                        <option value="">Seleccione un place</option>
-                                        @foreach ($places as $place)
-                                            <option value="{{ $place->id }}">{{ $place->titulo }}</option>
-                                        @endforeach
-                                    </select>
+                                   <input type="text" name="titulo" class="form-control" value="{{ $place->titulo }}">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                     
                                 <div class="form-floating">
-                                <textarea class="form-control" name="contenido" style="height: 100px"></textarea>
                                 <label for="contenido">Contenido</label>
+                                <textarea class="form-control" name="contenido" style="height: 100px">{{ $place->contenido }}</textarea>                                
+                                
                                 </div>
-                                <button type="submit" class="btn btn-primary">Guardar</button>                            
+                            <br>
+                            <button type="submit" class="btn btn-primary">Guardar</button>                            
                         </div>
                     </form>
 

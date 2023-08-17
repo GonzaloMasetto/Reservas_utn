@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Blog;
+use App\Models\Place;
 use App\Models\Event;
 
-class BlogController extends Controller
+class PlaceController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:ver-blog|crear-blog|editar-blog|borrar-blog')->only('index');
-         $this->middleware('permission:crear-blog', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-blog', ['only' => ['edit','update']]);
-         $this->middleware('permission:borrar-blog', ['only' => ['destroy']]);
+         $this->middleware('permission:ver-place|crear-place|editar-place|borrar-place')->only('index');
+         $this->middleware('permission:crear-place', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-place', ['only' => ['edit','update']]);
+         $this->middleware('permission:borrar-place', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -24,9 +24,9 @@ class BlogController extends Controller
     public function index()
     {       
          //Con paginación
-         $blogs = Blog::paginate(5);
-         return view('blogs.index',compact('blogs'));
-         //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $blogs->links() !!}    
+         $places = Place::paginate(5);
+         return view('places.index',compact('places'));
+         //al usar esta paginacion, recordar poner en el el index.blade.php este codigo  {!! $places->links() !!}    
     }
 
     /**
@@ -36,7 +36,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blogs.crear');
+        return view('places.crear');
     }
 
     /**
@@ -52,9 +52,9 @@ class BlogController extends Controller
             'contenido' => 'required',
         ]);
     
-        Blog::create($request->all());
+        Place::create($request->all());
     
-        return redirect()->route('blogs.index');
+        return redirect()->route('places.index');
     }
 
     /**
@@ -74,9 +74,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit(Place $place)
     {
-        return view('blogs.editar',compact('blog'));
+        return view('places.editar',compact('place'));
     }
 
     
@@ -88,16 +88,16 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, Place $place)
     {
          request()->validate([
             'titulo' => 'required',
             'contenido' => 'required',
         ]);
     
-        $blog->update($request->all());
+        $place->update($request->all());
     
-        return redirect()->route('blogs.index');
+        return redirect()->route('places.index');
     }
 
     /**
@@ -106,16 +106,16 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Place $place)
     {
-        $blog->delete();
+        $place->delete();
     
-        return redirect()->route('blogs.index');
+        return redirect()->route('places.index');
     }
 
-    public function calendar(Blog $blog)
+    public function calendar(Place $place)
     {
-        $all_events = Event::where('blog_id', $blog->id)->get();
+        $all_events = Event::where('place_id', $place->id)->get();
 
         $events = [];
 
@@ -129,12 +129,12 @@ class BlogController extends Controller
             ];
         }
 
-        return view('blogs.calendar', compact('events'));
+        return view('places.calendar', compact('events'));
     }
 
-    public function events(Blog $blog)
+    public function events(Place $place)
     {
-        $all_events = Event::where('blog_id', $blog->id)->get();
+        $all_events = Event::where('place_id', $place->id)->get();
 
         $events = [];
 

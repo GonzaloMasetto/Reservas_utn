@@ -20,7 +20,7 @@
     -moz-osx-font-smoothing: grayscale
 }
 
-.icon-social_blogger_circle:before {
+.icon-social_placeger_circle:before {
     content: '\0041';
 }
 
@@ -626,7 +626,7 @@ div.code-toolbar > .toolbar span:focus {
 
 @charset "UTF-8";
 /*-----------------------------------------------------------------------------------
-        Template Name: DBlog
+        Template Name: DPlace
         File Name: main.scss
         Author: Damian Komoński (komon.ski)
         Version: 1.0
@@ -654,8 +654,8 @@ div.code-toolbar > .toolbar span:focus {
 ---2.11 Tasks
 ---2.12 Footer
 ---2.13 About me - Detail info
----2.14 Blog List
----2.15 Blog Post
+---2.14 Place List
+---2.15 Place Post
 ---2.16 Article Nav
 ---2.17 Contact
 ---2.18 Portfolio
@@ -2653,7 +2653,7 @@ footer .copyright ul li a:hover {
     margin-bottom: 0;
 }
 
-/*-------------------------------------- 2.14 Blog list --------------------------------------*/
+/*-------------------------------------- 2.14 Place list --------------------------------------*/
 .category-title {
     margin: 10px 0 42px;
     overflow: auto;
@@ -2677,80 +2677,80 @@ footer .copyright ul li a:hover {
     color: #cccfd3;
 }
 
-/*-------------------------------------- 2.15 Blog post --------------------------------------*/
-.navbar-blog-post {
+/*-------------------------------------- 2.15 Place post --------------------------------------*/
+.navbar-place-post {
     box-shadow: none;
     height: 70px;
 }
 
-.body-blog-post {
+.body-place-post {
     background: #ffffff;
 }
 
-.header-top-blog-post {
+.header-top-place-post {
     border-bottom: none;
 }
 
-.articles-blog-post {
+.articles-place-post {
     box-shadow: none;
 }
 
 @media (max-width: 767px) {
-    .articles-blog-post {
+    .articles-place-post {
         margin-top: -30px;
     }
 }
 
-.articles-blog-post .articles-header {
+.articles-place-post .articles-header {
     margin: 0;
 }
 
-.articles-blog-post .articles-content {
+.articles-place-post .articles-content {
     padding: 0;
     margin-bottom: 40px;
 }
 
 @media (min-width: 576px) {
-    .articles-blog-post .articles-content .articles-content-blog-post-title {
+    .articles-place-post .articles-content .articles-content-place-post-title {
         font-size: 42px;
         line-height: 62px;
     }
 }
 
 @media (min-width: 576px) {
-    .articles-blog-post .articles-content p {
+    .articles-place-post .articles-content p {
         font-size: 18px;
         line-height: 36px;
     }
 }
 
-.articles-blog-post .articles-content .articles-content-block {
+.articles-place-post .articles-content .articles-content-block {
     margin-top: 60px;
 }
 
-.articles-blog-post .articles-content .vimeo-movie {
+.articles-place-post .articles-content .vimeo-movie {
     width: 100%;
     height: 418px;
     margin: 20px 0;
 }
 
-.articles-blog-post .articles-content ul, .articles-blog-post .articles-content ol {
+.articles-place-post .articles-content ul, .articles-place-post .articles-content ol {
     font-size: 18px;
     font-family: "Merriweather", serif;
 }
 
-.articles-blog-post .articles-content ul {
+.articles-place-post .articles-content ul {
     padding: 0;
     margin: 0;
 }
 
 @media (max-width: 575px) {
-    .articles-blog-post .articles-content ul {
+    .articles-place-post .articles-content ul {
         font-size: 15px;
     }
 }
 
-.articles-blog-post .articles-content ul li {
+.articles-place-post .articles-content ul li {
     list-style-type: none;
     position: relative;
     padding-left: 40px;
@@ -2758,19 +2758,19 @@ footer .copyright ul li a:hover {
     line-height: 36px;
 }
 
-.articles-blog-post .articles-content ol li {
+.articles-place-post .articles-content ol li {
     position: relative;
     margin: 8px 0;
     line-height: 36px;
 }
 
 @media (max-width: 575px) {
-    .articles-blog-post .articles-content ul li, .articles-blog-post .articles-content ol li {
+    .articles-place-post .articles-content ul li, .articles-place-post .articles-content ol li {
         line-height: 30px;
     }
 }
 
-.articles-blog-post .articles-content ul li:before {
+.articles-place-post .articles-content ul li:before {
     content: "";
     display: block;
     position: absolute;
@@ -2782,29 +2782,29 @@ footer .copyright ul li a:hover {
     border-radius: 3px;
 }
 
-.articles-blog-post .articles-content pre {
+.articles-place-post .articles-content pre {
     margin: 28px 0 40px;
 }
 
-.articles-blog-post .articles-content pre code[class*="language-"] {
+.articles-place-post .articles-content pre code[class*="language-"] {
     /*background: #f4f4f4;*/
     font-size: 16px;
     text-shadow: none;
 }
 
 @media (max-width: 575px) {
-    .articles-blog-post .articles-content pre code[class*="language-"] {
+    .articles-place-post .articles-content pre code[class*="language-"] {
         font-size: 13px;
     }
 }
 
-.articles-blog-post .articles-blog-post-share {
+.articles-place-post .articles-place-post-share {
     background: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.03);
     border: 1px solid #eceff2;
 }
 
-.articles-blog-post .articles-blog-post-share > h3 {
+.articles-place-post .articles-place-post-share > h3 {
     font-size: 15px;
     font-weight: 400;
     color: #a6a9ac;
@@ -2816,32 +2816,32 @@ footer .copyright ul li a:hover {
 }
 
 @media (max-width: 991px) {
-    .articles-blog-post .articles-blog-post-share > h3 {
+    .articles-place-post .articles-place-post-share > h3 {
         font-size: 16px;
     }
 }
 
-.articles-blog-post .articles-blog-post-share > div {
+.articles-place-post .articles-place-post-share > div {
     padding: 10px 0;
 }
 
-.articles-blog-post .articles-blog-post-share > div ul {
+.articles-place-post .articles-place-post-share > div ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.articles-blog-post .articles-blog-post-share > div ul li {
+.articles-place-post .articles-place-post-share > div ul li {
     padding: 5px 16px;
 }
 
 @media (max-width: 991px) {
-    .articles-blog-post .articles-blog-post-share > div ul li {
+    .articles-place-post .articles-place-post-share > div ul li {
         padding: 8px 16px;
     }
 }
 
-.articles-blog-post .articles-blog-post-share > div ul li a {
+.articles-place-post .articles-place-post-share > div ul li a {
     font-size: 13px;
     color: #757575;
     position: relative;
@@ -2849,20 +2849,20 @@ footer .copyright ul li a:hover {
 }
 
 @media (max-width: 991px) {
-    .articles-blog-post .articles-blog-post-share > div ul li a {
+    .articles-place-post .articles-place-post-share > div ul li a {
         font-size: 16px;
         padding-left: 32px;
     }
 }
 
-.articles-blog-post .articles-blog-post-share > div ul li a i {
+.articles-place-post .articles-place-post-share > div ul li a i {
     position: absolute;
     left: 0;
     top: 1px;
 }
 
 @media (max-width: 991px) {
-    .articles-blog-post .articles-blog-post-share > div ul li a i {
+    .articles-place-post .articles-place-post-share > div ul li a i {
         font-size: 18px;
     }
 }

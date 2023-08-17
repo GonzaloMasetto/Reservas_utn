@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Crear Blog</h3>
+            <h3 class="page__heading">Crear Place</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -23,7 +23,7 @@
                             </div>
                         @endif
 
-                    <form action="{{ route('blogs.store') }}" method="POST">
+                    <form action="{{ route('places.store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">

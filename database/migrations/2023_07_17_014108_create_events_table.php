@@ -20,10 +20,10 @@ class CreateEventsTable extends Migration
             $table->datetime('start_date');
             $table->datetime('end_date');
             
-            $table->unsignedBigInteger('blog_id')->nullable();
+            $table->unsignedBigInteger('place_id')->nullable();
             
-            $table->foreign('blog_id')
-                    ->references('id')->on('blogs')
+            $table->foreign('place_id')
+                    ->references('id')->on('places')
                     ->onDelete('set null');
 
             $table->timestamps();

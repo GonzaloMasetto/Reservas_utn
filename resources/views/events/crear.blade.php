@@ -37,11 +37,11 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="blog_id">Blog</label>
-                                    <select name="blog_id" class="form-control" id="miSelect">
-                                        <option value="">Seleccione un blog</option>
-                                        @foreach ($blogs as $blog)
-                                            <option value="{{ $blog->id }}">{{ $blog->titulo }}</option>
+                                    <label for="place_id">Place</label>
+                                    <select name="place_id" class="form-control" id="miSelect">
+                                        <option value="">Seleccione un place</option>
+                                        @foreach ($places as $place)
+                                            <option value="{{ $place->id }}">{{ $place->titulo }}</option>
                                         @endforeach
                                     </select>
                                     <div id="event_list">
@@ -89,11 +89,11 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const blogSelect = document.getElementById("miSelect");
+        const placeSelect = document.getElementById("miSelect");
         const dateTimeSection = document.getElementById("date-time-section");
 
-        blogSelect.addEventListener("change", function () {
-            if (blogSelect.value !== "") {
+        placeSelect.addEventListener("change", function () {
+            if (placeSelect.value !== "") {
                 dateTimeSection.style.display = "block";
             } else {
                 dateTimeSection.style.display = "none";
@@ -107,9 +107,9 @@
         var miSelect = document.getElementById("miSelect");
         
         miSelect.addEventListener("change", function() {
-            var selectedBlogId = miSelect.value;
-            var url = "{{ route('blogs.events', ['blog' => ':blogId']) }}";
-            url = url.replace(':blogId', selectedBlogId);
+            var selectedPlaceId = miSelect.value;
+            var url = "{{ route('places.events', ['place' => ':placeId']) }}";
+            url = url.replace(':placeId', selectedPlaceId);
             
             // Realizar una solicitud AJAX para obtener los eventos
             fetch(url)

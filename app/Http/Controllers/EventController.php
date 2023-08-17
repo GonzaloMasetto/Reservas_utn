@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
-use App\Models\Blog;
+use App\Models\Place;
 use Carbon\Carbon;
 
 
@@ -31,8 +31,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        $blogs = Blog::paginate(5);
-        return view('events.crear', compact('blogs'));
+        $places = Place::paginate(5);
+        return view('events.crear', compact('places'));
     }
 
     /**
@@ -46,7 +46,7 @@ class EventController extends Controller
         request()->validate([
             'event' => 'required',
             'contenido' => 'required',
-            'blog_id' => 'required',
+            'place_id' => 'required',
             'date' => 'required',
             'start_hour' => 'required',
             'end_hour' => 'required',
@@ -60,7 +60,7 @@ class EventController extends Controller
         Event::create([
             'event' => $request->event,
             'contenido' => $request->contenido,
-            'blog_id' => $request->blog_id,
+            'place_id' => $request->place_id,
             'start_date' => $start_date,
             'end_date' => $end_date,
         ]);
@@ -102,7 +102,7 @@ class EventController extends Controller
         request()->validate([
             'event' => 'required',
             'contenido' => 'required',
-            'blog_id' => 'required',
+            'place_id' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
