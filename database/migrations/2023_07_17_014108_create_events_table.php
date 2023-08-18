@@ -21,6 +21,13 @@ class CreateEventsTable extends Migration
             $table->datetime('end_date');
             $table->unsignedBigInteger('place_id')->nullable(); 
             $table->unsignedBigInteger('type_event_id')->nullable(); 
+            $table->string('otro')->nullable();
+            $table->boolean('video_conferencia')->default(false);
+            $table->boolean('difusion_redes')->default(false);
+            $table->boolean('transmision_youtube')->default(false);
+            $table->boolean('catering')->default(false);
+            $table->integer('cant_personas');
+            $table->string('adicional')->nullable();
             $table->timestamps();
         
             $table->foreign('place_id')->references('id')->on('places')->onDelete('set null'); 

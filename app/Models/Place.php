@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Place extends Model
 {
     use HasFactory;
-    protected $fillable = ['titulo', 'contenido'];
+    protected $fillable = ['titulo', 'contenido', 'cant_max'];
 
     //Relacion uno a muchos
     public function events(){

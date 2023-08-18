@@ -55,6 +55,8 @@ class EventController extends Controller
             'start_hour' => 'required',
             'end_hour' => 'required',
             'typeEvent_id' => 'required',
+            'cant_personas' => 'required',
+            
         ]);
     
         // Calcula las fechas y horas de inicio y finalización
@@ -69,7 +71,14 @@ class EventController extends Controller
             'type_event_id' => $request->typeEvent_id,
             'start_date' => $start_date,
             'end_date' => $end_date,
-            
+            'cant_personas' => $request->cant_personas, 
+            'video_conferencia' => $request->video_conferencia,
+            'difusion_redes' => $request->difusion_redes,
+            'transmision_youtube' => $request->transmision_youtube,
+            'catering' => $request->catering,
+            'otro' => $request->otro,
+            'adicional' => $request->adicional,
+
         ]);
     
         return redirect()->route('events.index');

@@ -50,6 +50,7 @@ class PlaceController extends Controller
         request()->validate([
             'titulo' => 'required',
             'contenido' => 'required',
+            'cant_max' => 'required',
         ]);
     
         Place::create($request->all());
@@ -93,6 +94,7 @@ class PlaceController extends Controller
          request()->validate([
             'titulo' => 'required',
             'contenido' => 'required',
+            'cant_max' => 'required',
         ]);
     
         $place->update($request->all());

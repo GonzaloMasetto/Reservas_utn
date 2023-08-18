@@ -10,7 +10,13 @@ use App\Models\TicComponent;
 class Event extends Model
 {
     use HasFactory;
-    protected $fillable = ['event', 'contenido', 'place_id','type_event_id','start_date', 'end_date'];
+    protected $fillable = ['event', 'contenido', 'place_id','type_event_id','start_date', 'end_date','otro',
+    'video_conferencia',
+    'difusion_redes',
+    'transmision_youtube',
+    'catering',
+    'cant_personas',
+    'adicional',];
 
     //Relacion uno a muchos (inversa)
     public function place(){

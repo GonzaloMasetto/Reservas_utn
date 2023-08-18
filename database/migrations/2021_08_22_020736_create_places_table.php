@@ -16,6 +16,7 @@ class CreatePlacesTable extends Migration
         Schema::create('places', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
+            $table->integer('cant_max');
             $table->text('contenido');
             $table->timestamps();
         });

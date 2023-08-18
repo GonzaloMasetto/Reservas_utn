@@ -27,9 +27,11 @@
                         @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                   <label for="event">Event</label>
-                                   <input type="text" name="event" class="form-control">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="event">Event</label>
+                                        <input type="text" name="event" class="form-control">
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
@@ -44,6 +46,9 @@
                                         <!-- Aquí se mostrarán los eventos -->
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12" id="date-time-section" style="display: none;">
                                 <div class="form-group">
                                     <label for="typeEvent_id">Tipo de Evento</label>
                                     <select name="typeEvent_id" class="form-control" id="miSelect">
@@ -57,19 +62,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="ticComponent_id">Seleccione componente de Tic</label>
-                                    <select name="ticComponent_id" class="form-control" id="miSelect">
-                                        <option value="">Seleccione componente de Tic</option>
-                                        @foreach ($ticComponents as $ticComponent)
-                                            <option value="{{ $ticComponent->id }}">{{ $ticComponent->nombre }}</option>
-                                        @endforeach
+                                    <label for="otro">Si selecciono Otro, ingrese aquí las especificaciones</label>
+                                    <input type="text" class="form-control" name="otro" id="otro" placeholder="Ingrese otro valor">
+                                </div>  
+                                <div class="form-group">
+                                    <label for="cant_personas">Cantidad de Personas</label>
+                                    <select name="cant_personas" class="form-control" id="miSelect">
+                                        <option value="">Seleccione Cantidad de Personas</option>
+                                        @for ($i = 1; $i <= $place->cant_max; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
                                     </select>
                                     <div id="event_list">
                                         <!-- Aquí se mostrarán los eventos -->
                                     </div>
                                 </div>
-                            </div>
-                            <div id="date-time-section" style="display: none;">
+                                
                                 <div class="form-group">
                                     <label for="selected_date">Selecciona un día:</label>
                                     <input type="datetime-local" id="selected_date" class="form-control" name="date">
@@ -86,13 +94,62 @@
                                         <!-- Las opciones de horas disponibles se generarán aquí mediante JavaScript -->
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    
+                                <div class="form-group">
+                                    <label for="ticComponent_id">Seleccione componente de Tic</label>
+                                    <select name="ticComponent_id" class="form-control" id="miSelect">
+                                        <option value="">Seleccione componente de Tic</option>
+                                        @foreach ($ticComponents as $ticComponent)
+                                            <option value="{{ $ticComponent->id }}">{{ $ticComponent->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div id="event_list">
+                                        <!-- Aquí se mostrarán los eventos -->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="hidden" name="video_conferencia" value="0">
+                                        <input class="form-check-input" type="checkbox" name="video_conferencia" id="video_conferencia" value="1">
+                                        <label class="form-check-label" for="video_conferencia">
+                                            Video Conferencia
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="hidden" name="difusion_redes" value="0">
+                                        <input class="form-check-input" type="checkbox" name="difusion_redes" id="difusion_redes" value="1">
+                                        <label class="form-check-label" for="difusion_redes">
+                                            Difusion en las Redes
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="hidden" name="transmision_youtube" value="0">
+                                        <input class="form-check-input" type="checkbox" name="transmision_youtube" id="transmision_youtube" value="1">
+                                        <label class="form-check-label" for="transmision_youtube">
+                                            Transmision en Youtube y Redes Sociales
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="hidden" name="catering" value="0">
+                                        <input class="form-check-input" type="checkbox" name="catering" id="catering" value="1">
+                                        <label class="form-check-label" for="catering">
+                                            Catering
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="adicional">Si desea Catering especificar aca todo lo que necesita</label>
+                                    <input type="text" class="form-control" name="adicional" id="adicional" placeholder="Ingrese los datos del catering">
+                                </div> 
+                    
                                 <div class="form-floating">
                                 <label for="contenido">Contenido</label>
                                 <textarea class="form-control" name="contenido" style="height: 100px" id="aca"></textarea>
                                 </div>
+                            </div>
+                            
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                
                                 <button type="submit" class="btn btn-primary my-2">Guardar</button>                            
                         </div>
                     </form>

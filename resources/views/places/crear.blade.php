@@ -31,12 +31,16 @@
                                    <label for="titulo">Título</label>
                                    <input type="text" name="titulo" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                <label for="cantMax" class="form-label">Cantidad Máxima</label>
+                                <input type="number" class="form-control" id="cantMax" name="cant_max" min="1">
+                            </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                     
                                 <div class="form-floating">
-                                <textarea class="form-control" name="contenido" style="height: 100px"></textarea>
                                 <label for="contenido">Contenido</label>
+                                <textarea class="form-control" name="contenido" style="height: 100px"></textarea>   
                                 </div>
                             
                             <button type="submit" class="btn btn-primary">Guardar</button>                            
