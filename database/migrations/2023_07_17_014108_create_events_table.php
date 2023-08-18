@@ -19,14 +19,13 @@ class CreateEventsTable extends Migration
             $table->string('contenido');
             $table->datetime('start_date');
             $table->datetime('end_date');
-            
-            $table->unsignedBigInteger('place_id')->nullable();
-            
-            $table->foreign('place_id')
-                    ->references('id')->on('places')
-                    ->onDelete('set null');
-
+            $table->unsignedBigInteger('place_id')->nullable(); 
+            $table->unsignedBigInteger('type_event_id')->nullable(); 
             $table->timestamps();
+        
+            $table->foreign('place_id')->references('id')->on('places')->onDelete('set null'); 
+            $table->foreign('type_event_id')->references('id')->on('places')->onDelete('set null'); 
+  
         });
     }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TypeEventController;
+use App\Http\Controllers\TicComponentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('places', PlaceController::class);
     Route::resource('events', EventController::class);
     Route::resource('typeEvents', TypeEventController::class);
+    Route::resource('ticComponents', TicComponentController::class);
     Route::get('/places/{place}/calendar', [App\Http\Controllers\PlaceController::class, 'calendar'])->name('places.calendar');
     Route::get('/places/{place}/events', [App\Http\Controllers\PlaceController::class, 'events'])->name('places.events');
 });

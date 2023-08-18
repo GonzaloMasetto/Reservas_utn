@@ -46,7 +46,13 @@ class SeederTablaPermisos extends Seeder
              'ver-typeEvent',
              'crear-typeEvent',
              'editar-typeEvent',
-             'borrar-typeEvent'
+             'borrar-typeEvent',
+
+             //Operacions sobre tabla componentes de tic
+             'ver-ticComponent',
+             'crear-ticComponent',
+             'editar-ticComponent',
+             'borrar-ticComponent'
         ];
 
         foreach($permisos as $permiso) {

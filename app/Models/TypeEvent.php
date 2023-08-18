@@ -9,4 +9,9 @@ class TypeEvent extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre', 'contenido'];
+
+    //Relacion uno a muchos
+    public function events(){
+        return $this->hasMany('App\Models\Event');
+    }
 }

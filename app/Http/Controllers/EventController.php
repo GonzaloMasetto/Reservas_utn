@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Place;
+use App\Models\TicComponent;
+use App\Models\TypeEvent;
 use Carbon\Carbon;
 
 
@@ -32,7 +34,9 @@ class EventController extends Controller
     public function create()
     {
         $places = Place::paginate(5);
-        return view('events.crear', compact('places'));
+        $typeEvents = TypeEvent::paginate(5);
+        $ticComponents = TicComponent::paginate(5);
+        return view('events.crear', compact('places', 'typeEvents','ticComponents'));
     }
 
     /**
@@ -50,6 +54,7 @@ class EventController extends Controller
             'date' => 'required',
             'start_hour' => 'required',
             'end_hour' => 'required',
+            'typeEvent_id' => 'required',
         ]);
     
         // Calcula las fechas y horas de inicio y finalización
@@ -61,8 +66,10 @@ class EventController extends Controller
             'event' => $request->event,
             'contenido' => $request->contenido,
             'place_id' => $request->place_id,
+            'type_event_id' => $request->typeEvent_id,
             'start_date' => $start_date,
             'end_date' => $end_date,
+            
         ]);
     
         return redirect()->route('events.index');

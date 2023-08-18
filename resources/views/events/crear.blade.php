@@ -31,10 +31,6 @@
                                    <label for="event">Event</label>
                                    <input type="text" name="event" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                   <label for="event">Nombre y Apellido</label>
-                                   <input type="text" name="event" class="form-control">
-                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="place_id">Place</label>
@@ -42,6 +38,30 @@
                                         <option value="">Seleccione un place</option>
                                         @foreach ($places as $place)
                                             <option value="{{ $place->id }}">{{ $place->titulo }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div id="event_list">
+                                        <!-- Aquí se mostrarán los eventos -->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="typeEvent_id">Tipo de Evento</label>
+                                    <select name="typeEvent_id" class="form-control" id="miSelect">
+                                        <option value="">Seleccione un Tipo de Evento</option>
+                                        @foreach ($typeEvents as $typeEvent)
+                                            <option value="{{ $typeEvent->id }}">{{ $typeEvent->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div id="event_list">
+                                        <!-- Aquí se mostrarán los eventos -->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ticComponent_id">Seleccione componente de Tic</label>
+                                    <select name="ticComponent_id" class="form-control" id="miSelect">
+                                        <option value="">Seleccione componente de Tic</option>
+                                        @foreach ($ticComponents as $ticComponent)
+                                            <option value="{{ $ticComponent->id }}">{{ $ticComponent->nombre }}</option>
                                         @endforeach
                                     </select>
                                     <div id="event_list">

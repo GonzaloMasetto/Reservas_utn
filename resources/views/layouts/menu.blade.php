@@ -17,4 +17,7 @@
     <a class="nav-link" href="/typeEvents">
         <i class=" fas fa-place"></i><span>Tipo de Eventos</span>
     </a>
+    <a class="nav-link" href="/ticComponents">
+        <i class=" fas fa-place"></i><span>Componentes tics</span>
+    </a>
 </li>
