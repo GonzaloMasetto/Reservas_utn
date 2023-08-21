@@ -48,6 +48,7 @@ class TicComponentController extends Controller
         request()->validate([
             'nombre' => 'required',
             'contenido' => 'required',
+            'stock' => 'required',
         ]);
     
         TicComponent::create($request->all());
@@ -90,6 +91,7 @@ class TicComponentController extends Controller
         request()->validate([
             'nombre' => 'required',
             'contenido' => 'required',
+            'stock' => 'required',
         ]);
     
         $ticComponent->update($request->all());

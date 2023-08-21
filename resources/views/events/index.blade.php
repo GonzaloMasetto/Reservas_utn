@@ -23,7 +23,8 @@
                                     <th style="color:#fff;">Contenido</th>                                    
                                     <th style="color:#fff;">Fecha Inicio</th>
                                     <th style="color:#fff;">Fecha Fin</th>   
-                                    <th style="color:#fff;">Acciones</th>                                                                   
+                                    <th style="color:#fff;">Acciones</th>  
+                                    <th style="color:#fff;">Estado</th>                                                                 
                               </thead>
                               <tbody>
                             @foreach ($events as $event)
@@ -46,6 +47,15 @@
                                         @endcan
                                     </form>
                                 </td>
+                                <td>
+                                    @if ($event->state_id == 1)
+                                        <button type="button" class="btn btn-success">Confirmado</button>
+                                    @elseif ($event->state_id == 2)
+                                        <button type="button" class="btn btn-warning">En Espera</button>
+                                    @elseif ($event->state_id == 3)
+                                        <button type="button" class="btn btn-danger">Cancelado</button>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -62,3 +72,6 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+<link rel="stylesheet" type="text/css" href="/css/event/index.css">
+@endpush

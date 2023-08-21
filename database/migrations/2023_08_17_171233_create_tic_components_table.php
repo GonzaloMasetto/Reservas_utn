@@ -15,7 +15,8 @@ class CreateTicComponentsTable extends Migration
     {
         Schema::create('tic_components', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre');      
+            $table->integer('stock');
             $table->text('contenido');
             $table->timestamps();
         });

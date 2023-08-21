@@ -20,7 +20,8 @@ class CreateEventsTable extends Migration
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->unsignedBigInteger('place_id')->nullable(); 
-            $table->unsignedBigInteger('type_event_id')->nullable(); 
+            $table->unsignedBigInteger('type_event_id')->nullable();            
+            $table->unsignedBigInteger('state_id')->nullable();
             $table->string('otro')->nullable();
             $table->boolean('video_conferencia')->default(false);
             $table->boolean('difusion_redes')->default(false);
@@ -28,11 +29,13 @@ class CreateEventsTable extends Migration
             $table->boolean('catering')->default(false);
             $table->integer('cant_personas');
             $table->string('adicional')->nullable();
-            $table->timestamps();
-        
+
+            $table->timestamps();  
+
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('set null'); 
             $table->foreign('place_id')->references('id')->on('places')->onDelete('set null'); 
-            $table->foreign('type_event_id')->references('id')->on('places')->onDelete('set null'); 
-  
+            $table->foreign('type_event_id')->references('id')->on('type_events')->onDelete('set null'); 
+
         });
     }
 
@@ -46,3 +49,4 @@ class CreateEventsTable extends Migration
         Schema::dropIfExists('events');
     }
 }
+

@@ -64,7 +64,7 @@ class EventController extends Controller
         $end_date = Carbon::createFromFormat('Y-m-d H:i', $request->date . ' ' . $request->end_hour);
     
         // Crea el evento con las fechas y horas calculadas
-        Event::create([
+        $event = Event::create([
             'event' => $request->event,
             'contenido' => $request->contenido,
             'place_id' => $request->place_id,
@@ -78,9 +78,19 @@ class EventController extends Controller
             'catering' => $request->catering,
             'otro' => $request->otro,
             'adicional' => $request->adicional,
-
+            'state_id' => 2,
         ]);
-    
+
+        if ($request->opcionTic === 'si' && $request->has('ticComponent_id')) {
+            $ticComponents = $request->input('ticComponent_id');
+            $cantidades = $request->input('cantidad'); // Obtener las cantidades
+
+            foreach ($ticComponents as $index => $ticComponentId) {
+                $cantidad = $cantidades[$index];
+                $event->ticComponents()->attach($ticComponentId, ['cantidad' => $cantidad]);
+            }
+        }
+            
         return redirect()->route('events.index');
     }
 

@@ -30,13 +30,24 @@
                                 <div class="form-group">
                                    <label for="nombre">Nombre</label>
                                    <input type="text" name="nombre" class="form-control">
+            
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock">Stock del Componente Tic</label>
+                                    <select name="stock" class="form-control" id="stock">
+                                        <option value="">Seleccione Stock del Componente Tic</option>
+                                        @for ($i = 1; $i <= 20; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                     
                                 <div class="form-floating">
-                                <textarea class="form-control" name="contenido" style="height: 100px"></textarea>
                                 <label for="contenido">Contenido</label>
+                                <textarea class="form-control" name="contenido" style="height: 100px"></textarea>
+                                
                                 </div>
                             
                             <button type="submit" class="btn btn-primary">Guardar</button>                            

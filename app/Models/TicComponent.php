@@ -9,12 +9,10 @@ use App\Models\Event;
 class TicComponent extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre', 'contenido'];
+    protected $fillable = ['nombre', 'contenido', 'stock'];
 
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'event_tic_component')
-            ->withPivot('fecha_relacion', 'cantidad')
-            ->withTimestamps();
+        return $this->belongsToMany(Event::class, 'event');
     }
 }
