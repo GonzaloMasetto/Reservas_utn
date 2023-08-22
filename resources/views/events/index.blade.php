@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Events</h3>
+            <h3 class="page__heading">Pedidos</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -35,6 +35,7 @@
                                 <td>{{ $event->start_date }}</td>
                                 <td>{{ $event->end_date }}</td>
                                 <td>
+                                    
                                     <form action="{{ route('events.destroy',$event->id) }}" method="POST">                                        
                                         @can('editar-event')
                                         <a class="btn btn-info" href="{{ route('events.edit',$event->id) }}">Editar</a>
@@ -48,12 +49,13 @@
                                     </form>
                                 </td>
                                 <td>
+                                    <!-- Agrega los botones en tu vista Blade -->
                                     @if ($event->state_id == 1)
-                                        <button type="button" class="btn btn-success" id="openModalBtn">Confirmado</button>
+                                        <button type="button" class="btn btn-success open-modal-btn" data-state-id="1" data-event-id="{{ $event->id }}">Confirmado</button>
                                     @elseif ($event->state_id == 2)
-                                        <button type="button" class="btn btn-warning" id="openModalBtn">En Espera</button>
+                                        <button type="button" class="btn btn-warning open-modal-btn" data-state-id="2" data-event-id="{{ $event->id }}">En Espera</button>
                                     @elseif ($event->state_id == 3)
-                                        <button type="button" class="btn btn-danger" id="openModalBtn">Cancelado</button>
+                                        <button type="button" class="btn btn-danger open-modal-btn" data-state-id="3" data-event-id="{{ $event->id }}">Cancelado</button>
                                     @endif
                                 </td>
                             </tr>
@@ -61,19 +63,28 @@
                             </tbody>
                         </table>
                         
+                        <!-- Agrega el modal -->
                         <div id="modal" class="modal" style="display: none;">
                             <div class="modal-content">
-                                <span class="close" id="closeModalBtn">&times;</span>
-                                <form action="{{ route('events.destroy',$event->id) }}" method="POST">                                        
-                                       
+                                <div class="form-group">
+                                    <span class="close" id="closeModalBtn">&times;</span>
+                                    <h2>Desea cambiar el estado de este pedido?</h2> <!-- Título agregado -->
+                                    <p>Selecciona el estado que deseas:</p> <!-- Subtítulo agregado -->
+                                    <form action="{{ route('events.updatestate', ['event' => 'EVENT_ID_PLACEHOLDER']) }}" method="POST" id="formState">
+                                    @csrf
+                                    @method('PUT')
+                                        <select  name="state_id" id="newStateSelect"  class="form-control"></select>
 
-                                        
-                                    <button type="submit" class="btn btn-danger">Borrar</button>      
-                                </form>
-                                
+                                        <button type="submit" class="btn btn-primary my-3">Cambiar Estado</button> <!-- Texto del botón modificado -->
+                                    </form> 
+                                </div>
                             </div>
-
-                        </div>     
+                        </div>   
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <!-- Ubicamos la paginacion a la derecha -->
                         <div class="pagination justify-content-end">
                             {!! $events->links() !!}
@@ -90,24 +101,49 @@
 <link rel="stylesheet" type="text/css" href="/css/event/index.css">
 <!-- Agrega esta línea al final del body de tu página para incluir jQuery y los scripts de Bootstrap -->
 <script>
-    const openModalBtn = document.getElementById("openModalBtn");
-    const closeModalBtn = document.getElementById("closeModalBtn");
-    const modal = document.getElementById("modal");
+    document.addEventListener("DOMContentLoaded", function() {
+        const openModalBtns = document.querySelectorAll(".open-modal-btn");
+        const newStateSelect = document.getElementById("newStateSelect");
+        const form = document.getElementById("formState"); // Agregamos esta línea
 
-    openModalBtn.addEventListener("click", () => {
-    modal.style.display = "flex";
+        openModalBtns.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const stateId = this.getAttribute("data-state-id");
+                const eventId = this.getAttribute("data-event-id");
+                newStateSelect.innerHTML = ""; // Limpiamos las opciones existentes
+
+                // Agregamos las opciones según el botón clicado
+                if (stateId === "1") {
+                    newStateSelect.innerHTML = `
+                        <option value="3">Cancelado</option>
+                    `;
+                } else if (stateId === "2") {
+                    newStateSelect.innerHTML = `
+                        <option value="1">Confirmado</option>
+                        <option value="3">Cancelado</option>
+                    `;
+                } else if (stateId === "3") {
+                    newStateSelect.innerHTML = `
+                        <option value="1">Confirmado</option>       
+                    `;
+                }
+
+                // Actualizamos la URL del formulario con el ID del evento
+                form.action = form.action.replace('EVENT_ID_PLACEHOLDER', eventId);
+
+                // Mostramos el modal
+                const modal = document.getElementById("modal");
+                modal.style.display = "flex";
+            });
+        });
+
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        closeModalBtn.addEventListener("click", function() {
+            const modal = document.getElementById("modal");
+            modal.style.display = "none";
+        });
     });
-
-    closeModalBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-    });
-
-    window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-    });
-
 </script>
+
 
 @endpush

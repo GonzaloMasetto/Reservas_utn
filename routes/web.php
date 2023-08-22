@@ -40,4 +40,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('ticComponents', TicComponentController::class);
     Route::get('/places/{place}/calendar', [App\Http\Controllers\PlaceController::class, 'calendar'])->name('places.calendar');
     Route::get('/places/{place}/events', [App\Http\Controllers\PlaceController::class, 'events'])->name('places.events');
+    Route::put('/events/{event}/updatestate', [App\Http\Controllers\EventController::class, 'updatestate'])->name('events.updatestate');
 });

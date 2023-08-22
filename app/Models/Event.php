@@ -12,7 +12,7 @@ use App\Models\State;
 class Event extends Model
 {
     use HasFactory;
-    protected $fillable = ['event', 'contenido', 'place_id','type_event_id','state_id','start_date', 'end_date','otro',
+    protected $fillable = ['event', 'contenido', 'place_id','user_id','type_event_id','state_id','start_date', 'end_date','otro',
     'video_conferencia',
     'difusion_redes',
     'transmision_youtube',
@@ -37,6 +37,10 @@ class Event extends Model
     public function ticComponents()
     {
         return $this->belongsToMany(TicComponent::class, 'event_tic_components', 'event_id', 'tic_component_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
     
 }

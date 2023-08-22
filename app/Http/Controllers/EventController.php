@@ -79,6 +79,7 @@ class EventController extends Controller
             'otro' => $request->otro,
             'adicional' => $request->adicional,
             'state_id' => 2,
+            'user_id' => auth()->user()->id,
         ]);
 
         if ($request->opcionTic === 'si' && $request->has('ticComponent_id')) {
@@ -150,23 +151,17 @@ class EventController extends Controller
     
         return redirect()->route('events.index');
     }
-    public function updateState(Request $request)
+    public function updateState(Request $request, Event $event)
     {
-        $event = Evento::find($request->event_id);      
-        // Actualiza el estado del evento aquí
-        $event->update(['state_id' => $request->nuevo_estado]);
-
-        // Resto del código necesario
-
-        return view('tu_vista', compact('estadosFaltantes'));
-    }
-    public function getMissingStates(Evento $event)
-    {
-        $estadosFaltantes = Estado::where('id', '!=', $event->state_id)->get();
+        $newStateId = $request->input('state_id');
         
-        return response()->json(['estadosFaltantes' => $estadosFaltantes]);
+        // Aquí puedes agregar validaciones y lógica adicional si es necesario
+        
+        $event->state_id = $newStateId;
+        $event->save();
+        
+        return redirect()->back()->with('success', 'Estado del evento actualizado exitosamente.');
     }
-
 
     
 }
