@@ -150,6 +150,23 @@ class EventController extends Controller
     
         return redirect()->route('events.index');
     }
-    
+    public function updateState(Request $request)
+    {
+        $event = Evento::find($request->event_id);      
+        // Actualiza el estado del evento aquí
+        $event->update(['state_id' => $request->nuevo_estado]);
+
+        // Resto del código necesario
+
+        return view('tu_vista', compact('estadosFaltantes'));
+    }
+    public function getMissingStates(Evento $event)
+    {
+        $estadosFaltantes = Estado::where('id', '!=', $event->state_id)->get();
+        
+        return response()->json(['estadosFaltantes' => $estadosFaltantes]);
+    }
+
+
     
 }

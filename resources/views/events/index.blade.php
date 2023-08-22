@@ -49,18 +49,31 @@
                                 </td>
                                 <td>
                                     @if ($event->state_id == 1)
-                                        <button type="button" class="btn btn-success">Confirmado</button>
+                                        <button type="button" class="btn btn-success" id="openModalBtn">Confirmado</button>
                                     @elseif ($event->state_id == 2)
-                                        <button type="button" class="btn btn-warning">En Espera</button>
+                                        <button type="button" class="btn btn-warning" id="openModalBtn">En Espera</button>
                                     @elseif ($event->state_id == 3)
-                                        <button type="button" class="btn btn-danger">Cancelado</button>
+                                        <button type="button" class="btn btn-danger" id="openModalBtn">Cancelado</button>
                                     @endif
                                 </td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
+                        
+                        <div id="modal" class="modal" style="display: none;">
+                            <div class="modal-content">
+                                <span class="close" id="closeModalBtn">&times;</span>
+                                <form action="{{ route('events.destroy',$event->id) }}" method="POST">                                        
+                                       
 
+                                        
+                                    <button type="submit" class="btn btn-danger">Borrar</button>      
+                                </form>
+                                
+                            </div>
+
+                        </div>     
                         <!-- Ubicamos la paginacion a la derecha -->
                         <div class="pagination justify-content-end">
                             {!! $events->links() !!}
@@ -73,5 +86,28 @@
     </section>
 @endsection
 @push('scripts')
+<!-- Agrega esta línea en el head de tu página para incluir los estilos de Bootstrap -->
 <link rel="stylesheet" type="text/css" href="/css/event/index.css">
+<!-- Agrega esta línea al final del body de tu página para incluir jQuery y los scripts de Bootstrap -->
+<script>
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const modal = document.getElementById("modal");
+
+    openModalBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+    });
+
+</script>
+
 @endpush
