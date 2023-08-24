@@ -15,10 +15,12 @@ class EventController extends Controller
     
     function __construct()
     {
-         $this->middleware('permission:ver-event|crear-event|editar-event|borrar-event')->only('index');
+         $this->middleware('permission:ver-event|crear-event|editar-event|borrar-event|ver-eventconfirmados')->only('index');
          $this->middleware('permission:crear-event', ['only' => ['create','store']]);
          $this->middleware('permission:editar-event', ['only' => ['edit','update']]);
          $this->middleware('permission:borrar-event', ['only' => ['destroy']]);
+         $this->middleware('permission:ver-eventconfirmados')->only('confirmados');
+
     }
     public function index()
     {
@@ -26,6 +28,7 @@ class EventController extends Controller
         return view('events.index',compact('events'));
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -150,6 +153,12 @@ class EventController extends Controller
         $event->delete();
     
         return redirect()->route('events.index');
+    }
+    public function confirmados()
+    {    
+        $events = Event::where('state_id', 1)->paginate(5);
+        
+        return view('events.confirmados',compact('events'));
     }
     public function updateState(Request $request, Event $event)
     {

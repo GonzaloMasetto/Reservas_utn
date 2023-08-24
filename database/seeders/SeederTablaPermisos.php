@@ -35,6 +35,7 @@ class SeederTablaPermisos extends Seeder
             'crear-event',
             'editar-event',
             'borrar-event',
+            'ver-eventconfirmados',
 
             //Operacions sobre tabla usuarios
             'ver-usuario',

@@ -26,9 +26,10 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+// Agrega la ruta aquí
+Route::get('/events/confirmados', [EventController::class, 'confirmados'])->name('events.confirmados');
 Auth::routes();
-
-
 
 //y creamos un grupo de rutas protegidas para los controladores
 Route::group(['middleware' => ['auth']], function() {
@@ -41,4 +42,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/places/{place}/calendar', [App\Http\Controllers\PlaceController::class, 'calendar'])->name('places.calendar');
     Route::get('/places/{place}/events', [App\Http\Controllers\PlaceController::class, 'events'])->name('places.events');
     Route::put('/events/{event}/updatestate', [App\Http\Controllers\EventController::class, 'updatestate'])->name('events.updatestate');
+    //Agregalo aca, si lo agrego afuera de esto funciona, pero si lo quiero agregar adentro de este Route:group no funciona porque?
+
+
 });
