@@ -26,3 +26,8 @@
   font-size: 20px;
   cursor: pointer;
 }
+/* Estilo para botones desactivados */
+.custom-disabled-btn {
+  pointer-events: none; /* Deshabilita los eventos de clic */
+  opacity: 1 !important; /* Mantiene la opacidad original */
+}

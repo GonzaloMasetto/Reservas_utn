@@ -198,7 +198,6 @@
         componenteDiv.className = 'componente';
         componenteDiv.innerHTML = `
             <div class="d-flex align-items-center mb-2">
-                <label for="ticComponent_id" class="mr-2">Seleccione componente de Tic</label>
                 <select name="ticComponent_id[]" class="form-control componentesSelect">
                     <option value="">Seleccione componente de Tic</option>
                     @foreach ($ticComponents as $ticComponent)

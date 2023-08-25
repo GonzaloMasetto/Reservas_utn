@@ -49,13 +49,22 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <!-- Agrega los botones en tu vista Blade -->
-                                    @if ($event->state_id == 1)
-                                        <button type="button" class="btn btn-success open-modal-btn" data-state-id="1" data-event-id="{{ $event->id }}">Confirmado</button>
-                                    @elseif ($event->state_id == 2)
-                                        <button type="button" class="btn btn-warning open-modal-btn" data-state-id="2" data-event-id="{{ $event->id }}">En Espera</button>
-                                    @elseif ($event->state_id == 3)
-                                        <button type="button" class="btn btn-danger open-modal-btn" data-state-id="3" data-event-id="{{ $event->id }}">Cancelado</button>
+                                    @if (Auth::user()->hasRole('alumno'))
+                                        @if ($event->state_id == 1)
+                                            <button type="button" class="btn btn-success custom-disabled-btn" disabled>Confirmado</button>
+                                        @elseif ($event->state_id == 2)
+                                            <button type="button" class="btn btn-warning custom-disabled-btn" disabled>En Espera</button>
+                                        @elseif ($event->state_id == 3)
+                                            <button type="button" class="btn btn-danger custom-disabled-btn" disabled>Cancelado</button>
+                                        @endif
+                                    @else
+                                        @if ($event->state_id == 1)
+                                            <button type="button" class="btn btn-success open-modal-btn" data-state-id="1" data-event-id="{{ $event->id }}">Confirmado</button>
+                                        @elseif ($event->state_id == 2)
+                                            <button type="button" class="btn btn-warning open-modal-btn" data-state-id="2" data-event-id="{{ $event->id }}">En Espera</button>
+                                        @elseif ($event->state_id == 3)
+                                            <button type="button" class="btn btn-danger open-modal-btn" data-state-id="3" data-event-id="{{ $event->id }}">Cancelado</button>
+                                        @endif
                                     @endif
                                 </td>
                             </tr>

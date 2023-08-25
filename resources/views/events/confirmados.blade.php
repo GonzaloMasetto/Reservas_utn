@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Pedidos</h3>
+            <h3 class="page__heading">Eventos Confirmados</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -14,7 +14,7 @@
                                 <thead style="background-color:#6777ef">                                     
                                     <th style="display: none;">ID</th>
                                     <th style="color:#fff;">Nombre</th>
-                                    <th style="color:#fff;">blog</th>                                    
+                                    <th style="color:#fff;">Lugar</th>                                    
                                     <th style="color:#fff;">Fecha Inicio</th>
                                     <th style="color:#fff;">Fecha Fin</th>   
                                     <th style="color:#fff;">Acciones</th>                                                                
@@ -24,7 +24,7 @@
                             <tr>
                                 <td style="display: none;">{{ $event->id }}</td>                                
                                 <td>{{ $event->event }}</td>
-                                <td>{{ $event->blog_id }}</td>
+                                <td>{{ $event->place->titulo }}</td>
                                 <td>{{ $event->start_date }}</td>
                                 <td>{{ $event->end_date }}</td>
                                 <td>
