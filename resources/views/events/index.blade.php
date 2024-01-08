@@ -18,11 +18,10 @@
             
                         <table class="table table-striped mt-2">
                                 <thead style="background-color:#6777ef">                                     
-                                    <th style="display: none;">ID</th>
-                                    <th style="color:#fff;">Nombre</th>
-                                    <th style="color:#fff;">Contenido</th>                                    
-                                    <th style="color:#fff;">Fecha Inicio</th>
-                                    <th style="color:#fff;">Fecha Fin</th>   
+                                    <th style="color:#fff;">Evento</th>
+                                    <th style="color:#fff;">Lugar</th>
+                                    <th style="color:#fff;">Fecha de Inicio</th>
+                                    <th style="color:#fff;">Fecha de Fin</th>
                                     <th style="color:#fff;">Acciones</th>  
                                     <th style="color:#fff;">Estado</th>                                                                 
                               </thead>
@@ -31,22 +30,26 @@
                             <tr>
                                 <td style="display: none;">{{ $event->id }}</td>                                
                                 <td>{{ $event->event }}</td>
-                                <td>{{ $event->contenido }}</td>
+                                <td>{{ $event->place->titulo }}</td>
                                 <td>{{ $event->start_date }}</td>
                                 <td>{{ $event->end_date }}</td>
                                 <td>
                                     
-                                    <form action="{{ route('events.destroy',$event->id) }}" method="POST">                                        
+                                @if(auth()->user()->hasRole('alumno'))
+                                    <form action="{{ route('events.destroy', $event->id) }}" method="POST">                                        
                                         @can('editar-event')
-                                        <a class="btn btn-info" href="{{ route('events.edit',$event->id) }}">Editar</a>
+                                            <a class="btn btn-info" href="{{ route('events.edit', $event->id) }}">Editar</a>
                                         @endcan
 
                                         @csrf
                                         @method('DELETE')
                                         @can('borrar-event')
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                            <button type="submit" class="btn btn-danger">Borrar</button>
                                         @endcan
                                     </form>
+                                @else
+                                    <button class="btn btn-primary">Ver</button>
+                                @endif
                                 </td>
                                 <td>
                                     @if (Auth::user()->hasRole('alumno'))

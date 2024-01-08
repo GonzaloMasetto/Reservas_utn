@@ -27,7 +27,7 @@ class EventController extends Controller
         $events = Event::paginate(5);
         return view('events.index',compact('events'));
     }
-
+    
     
     /**
      * Show the form for creating a new resource.
