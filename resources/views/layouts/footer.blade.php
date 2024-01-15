@@ -1,3 +1,3 @@
 <div class="footer-left">
-    All rights reserved &copy; {{ date('Y') }}
+    UTN Facultad Regional Mendoza &copy; {{ date('Y') }} creado por Gonzalo Masetto
 </div>

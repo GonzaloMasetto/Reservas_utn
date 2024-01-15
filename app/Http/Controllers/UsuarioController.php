@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 
+//esto es para que dispare el event userregistered
+use App\Events\UserCreated;
+
 class UsuarioController extends Controller
 {
     /**
@@ -19,6 +22,14 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:ver-usuario|crear-usuario|editar-usuario|borrar-usuario', ['only' => ['index']]);
+         $this->middleware('permission:crear-usuario', ['only' => ['create','store']]);
+         $this->middleware('permission:editar-usuario', ['only' => ['edit','update']]);
+         $this->middleware('permission:borrar-usuario', ['only' => ['destroy']]);
+    }
+    
     public function index(Request $request)
     {      
         //Sin paginación
@@ -61,10 +72,19 @@ class UsuarioController extends Controller
     
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-    
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-    
+
+        // Obtener el rol del $request
+        $requestedRole = $request->input('roles');
+
+        // Si el rol solicitado está vacío o es nulo, se asigna el rol de "alumno" por defecto
+        $roleToAssign = !empty($requestedRole) ? $requestedRole : 'alumno';
+
+        // Buscar el rol en la base de datos o crearlo si no existe
+        $role = Role::firstOrCreate(['name' => $roleToAssign]);
+
+        // Asignar el rol al usuario
+        $user->assignRole($role);
         return redirect()->route('usuarios.index');
     }
 
