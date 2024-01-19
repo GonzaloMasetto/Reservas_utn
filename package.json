@@ -10,8 +10,8 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.21",
-        "cypress": "^12.17.3",
+        "axios": "^1.6.5",
+        "cypress": "^13.6.3",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "webpack": "^5.88.1"

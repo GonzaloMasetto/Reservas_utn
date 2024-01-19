@@ -24,7 +24,7 @@ class EventController extends Controller
     }
     public function index()
     {
-        $events = Event::paginate(5);
+        $events = Event::paginate(5); //auth()->user()->id
         return view('events.index',compact('events'));
     }
     
