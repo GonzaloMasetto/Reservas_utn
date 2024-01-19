@@ -22,7 +22,8 @@
                             </button>
                             </div>
                         @endif
-
+                        
+                       
 
                     <form action="{{ route('places.update',$place->id) }}" method="POST">
                         @csrf
@@ -30,18 +31,21 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                   <label for="titulo">Título</label>
+                                   <label for="titulo">Nombre</label>
                                    <input type="text" name="titulo" class="form-control" value="{{ $place->titulo }}">
                                 </div>
+                                <div class="form-group">
+                                <label for="cantMax" class="form-label">Cantidad Máxima</label>
+                                <input type="number" class="form-control" id="cantMax" name="cant_max" min="1" value="{{ $place->cant_max }}">
+                            </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                     
                                 <div class="form-floating">
                                 <label for="contenido">Contenido</label>
-                                <textarea class="form-control" name="contenido" style="height: 100px">{{ $place->contenido }}</textarea>                                
-                                
+                                <textarea class="form-control" name="contenido" style="height: 100px"> {{ $place->contenido }}</textarea>   
                                 </div>
-                            <br>
+                            
                             <button type="submit" class="btn btn-primary">Guardar</button>                            
                         </div>
                     </form>
