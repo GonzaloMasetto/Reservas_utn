@@ -19,7 +19,7 @@ class RolesTableSeeder extends Seeder
 
        // Asignar los permisos necesarios al rol "alumno"
        $permissions = [
-           'ver-rol',
+           'ver-event',
        ];
 
        $role->syncPermissions($permissions);

@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------------
- Template Name: DBlog
+ Template Name: DPlace
  File Name: scripts.js
  Author: Damian Komoński (komon.ski)
  Version: 1.0
@@ -15,7 +15,7 @@
  5. Animation Nav Menu Icon
  6. Counters Number
  7. Owl Carousel
- 8. Comments Margin in Blog Post
+ 8. Comments Margin in Place Post
  9. Responsive Navigation
  10. Search Top Header Navigation
  11. Portfolio Filter
@@ -89,7 +89,7 @@ $(document).ready(function () {
         },
     });
 
-    /*-------------------------------------- 8. Comments Margin in Blog Post --------------------------------------*/
+    /*-------------------------------------- 8. Comments Margin in Place Post --------------------------------------*/
     $('.comments ol li:has(.comment-response) > .comment').
         addClass('comment-small-margin');
 });

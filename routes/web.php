@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TypeEventController;
+use App\Http\Controllers\TicComponentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,16 +26,24 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
+// Agrega la ruta aquí
+Route::get('/events/confirmados', [EventController::class, 'confirmados'])->name('events.confirmados');
+Auth::routes();
 
 
 //y creamos un grupo de rutas protegidas para los controladores
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RolController::class);
     Route::resource('usuarios', UsuarioController::class);
-    Route::resource('blogs', BlogController::class);
+    Route::resource('places', PlaceController::class);
     Route::resource('events', EventController::class);
-    Route::get('/blogs/{blog}/calendar', [App\Http\Controllers\BlogController::class, 'calendar'])->name('blogs.calendar');
-    Route::get('/blogs/{blog}/events', [App\Http\Controllers\BlogController::class, 'events'])->name('blogs.events');
+    Route::resource('typeEvents', TypeEventController::class);
+    Route::resource('ticComponents', TicComponentController::class);
+    Route::get('/places/{place}/calendar', [App\Http\Controllers\PlaceController::class, 'calendar'])->name('places.calendar');
+    Route::get('/places/{place}/events', [App\Http\Controllers\PlaceController::class, 'events'])->name('places.events');
+    Route::put('/events/{event}/updatestate', [App\Http\Controllers\EventController::class, 'updatestate'])->name('events.updatestate');
+    //Agregalo aca, si lo agrego afuera de esto funciona, pero si lo quiero agregar adentro de este Route:group no funciona porque?
+
+
 });

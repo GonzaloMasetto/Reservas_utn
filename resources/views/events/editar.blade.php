@@ -24,7 +24,7 @@
                         @endif
 
 
-                    <form action="{{ route('blogs.update',$blog->id) }}" method="POST">
+                    <form action="{{ route('places.update',$place->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -45,11 +45,11 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <label for="titulo">Blog</label>
-                                    <select name="blog_id" class="form-control">
-                                        <option value="">Seleccione un blog</option>
-                                        @foreach ($blogs as $blog)
-                                            <option value="{{ $blog->id }}">{{ $blog->titulo }}</option>
+                                    <label for="titulo">Place</label>
+                                    <select name="place_id" class="form-control">
+                                        <option value="">Seleccione un place</option>
+                                        @foreach ($places as $place)
+                                            <option value="{{ $place->id }}">{{ $place->titulo }}</option>
                                         @endforeach
                                     </select>
                                 </div>

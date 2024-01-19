@@ -564,13 +564,13 @@ readers do not read off random characters that represent icons */
 .fa-blind:before {
   content: "\f29d"; }
 
-.fa-blog:before {
+.fa-place:before {
   content: "\f781"; }
 
-.fa-blogger:before {
+.fa-placeger:before {
   content: "\f37c"; }
 
-.fa-blogger-b:before {
+.fa-placeger-b:before {
   content: "\f37d"; }
 
 .fa-bluetooth:before {
@@ -2688,7 +2688,7 @@ readers do not read off random characters that represent icons */
 .fa-meteor:before {
   content: "\f753"; }
 
-.fa-microblog:before {
+.fa-microplace:before {
   content: "\e01a"; }
 
 .fa-microchip:before {

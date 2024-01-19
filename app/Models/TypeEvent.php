@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class TypeEvent extends Model
 {
     use HasFactory;
-    protected $fillable = ['titulo', 'contenido'];
+    protected $fillable = ['nombre', 'contenido'];
 
     //Relacion uno a muchos
     public function events(){

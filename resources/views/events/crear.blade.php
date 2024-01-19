@@ -27,29 +27,57 @@
                         @csrf
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                   <label for="event">Event</label>
-                                   <input type="text" name="event" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                   <label for="event">Nombre y Apellido</label>
-                                   <input type="text" name="event" class="form-control">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="event">Event</label>
+                                        <input type="text" name="event" class="form-control">
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label for="place_id">Place</label>
+                                        <select name="place_id" class="form-control" id="miSelect">
+                                            <option value="">Seleccione un place</option>
+                                            @foreach ($places as $place)
+                                                <option value="{{ $place->id }}">{{ $place->titulo }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div id="event_list">
+                                            <!-- Aquí se mostrarán los eventos -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12" id="date-time-section" style="display: none;">
                                 <div class="form-group">
-                                    <label for="blog_id">Blog</label>
-                                    <select name="blog_id" class="form-control" id="miSelect">
-                                        <option value="">Seleccione un blog</option>
-                                        @foreach ($blogs as $blog)
-                                            <option value="{{ $blog->id }}">{{ $blog->titulo }}</option>
+                                    <label for="typeEvent_id">Tipo de Evento</label>
+                                    <select name="typeEvent_id" class="form-control" id="miSelect">
+                                        <option value="">Seleccione un Tipo de Evento</option>
+                                        @foreach ($typeEvents as $typeEvent)
+                                            <option value="{{ $typeEvent->id }}">{{ $typeEvent->nombre }}</option>
                                         @endforeach
                                     </select>
                                     <div id="event_list">
                                         <!-- Aquí se mostrarán los eventos -->
                                     </div>
                                 </div>
-                            </div>
-                            <div id="date-time-section" style="display: none;">
+                                <div class="form-group">
+                                    <label for="otro">Si selecciono Otro, ingrese aquí las especificaciones</label>
+                                    <input type="text" class="form-control" name="otro" id="otro" placeholder="Ingrese otro valor">
+                                </div>  
+                                <div class="form-group">
+                                    <label for="cant_personas">Cantidad de Personas</label>
+                                    <select name="cant_personas" class="form-control" id="miSelect">
+                                        <option value="">Seleccione Cantidad de Personas</option>
+                                        @for ($i = 1; $i <= $place->cant_max; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <div id="event_list">
+                                        <!-- Aquí se mostrarán los eventos -->
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group">
                                     <label for="selected_date">Selecciona un día:</label>
                                     <input type="datetime-local" id="selected_date" class="form-control" name="date">
@@ -66,13 +94,77 @@
                                         <!-- Las opciones de horas disponibles se generarán aquí mediante JavaScript -->
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    
+                                <div class="form-group">
+                                    <label>Desea Pedir Componentes Tic?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="opcionTic" value="si" id="reservaSi">
+                                        <label class="form-check-label" for="reservaSi">
+                                            SI
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="opcionTic" value="no" id="reservaNo">
+                                        <label class="form-check-label" for="reservaNo">
+                                            NO
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" id="opcionesComponentes" style="display: none;">
+                                    <div class="componente">
+                                        
+                                    </div>
+                                </div>
+
+                                <div id="agregarComponente" style="display: none;">
+                                    <button type="button" id="botonAgregarComponente" class="btn btn-primary">
+                                        Agregar otro componente <i class="fa fa-plus-circle"></i>
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="hidden" name="video_conferencia" value="0">
+                                        <input class="form-check-input" type="checkbox" name="video_conferencia" id="video_conferencia" value="1">
+                                        <label class="form-check-label" for="video_conferencia">
+                                            Video Conferencia
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="hidden" name="difusion_redes" value="0">
+                                        <input class="form-check-input" type="checkbox" name="difusion_redes" id="difusion_redes" value="1">
+                                        <label class="form-check-label" for="difusion_redes">
+                                            Difusion en las Redes
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="hidden" name="transmision_youtube" value="0">
+                                        <input class="form-check-input" type="checkbox" name="transmision_youtube" id="transmision_youtube" value="1">
+                                        <label class="form-check-label" for="transmision_youtube">
+                                            Transmision en Youtube y Redes Sociales
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="hidden" name="catering" value="0">
+                                        <input class="form-check-input" type="checkbox" name="catering" id="catering" value="1">
+                                        <label class="form-check-label" for="catering">
+                                            Catering
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="adicional">Si desea Catering especificar aca todo lo que necesita</label>
+                                    <input type="text" class="form-control" name="adicional" id="adicional" placeholder="Ingrese los datos del catering">
+                                </div> 
+                    
                                 <div class="form-floating">
                                 <label for="contenido">Contenido</label>
                                 <textarea class="form-control" name="contenido" style="height: 100px" id="aca"></textarea>
                                 </div>
+                            </div>
+                            
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+
+                                
                                 <button type="submit" class="btn btn-primary my-2">Guardar</button>                            
                         </div>
                     </form>
@@ -88,12 +180,98 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
+    const reservaSi = document.getElementById('reservaSi');
+    const reservaNo = document.getElementById('reservaNo');
+    const opcionesComponentes = document.getElementById('opcionesComponentes');
+    const botonAgregarComponente = document.getElementById('botonAgregarComponente');
+    const agregarComponente = document.getElementById('agregarComponente');
+
+    // Agrega el primer componente
+    agregarNuevoComponente();
+    
+    botonAgregarComponente.addEventListener('click', function() {
+        agregarNuevoComponente();
+    });
+    
+    function agregarNuevoComponente() {
+        const componenteDiv = document.createElement('div');
+        componenteDiv.className = 'componente';
+        componenteDiv.innerHTML = `
+            <div class="d-flex align-items-center mb-2">
+                <select name="ticComponent_id[]" class="form-control componentesSelect">
+                    <option value="">Seleccione componente de Tic</option>
+                    @foreach ($ticComponents as $ticComponent)
+                        <option value="{{ $ticComponent->id }}">{{ $ticComponent->nombre }}</option>
+                    @endforeach
+                </select>
+                <label for="cantidad" class="ml-4 mr-2">Cantidad:</label>
+                <select name="cantidad[]" class="form-control cantidadSelect" disabled>
+                    <option value="">Seleccione cantidad</option>
+                </select>
+                <button type="button" class="btn btn-danger ml-2 eliminarComponente">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        `;
+        opcionesComponentes.appendChild(componenteDiv);
+        addEliminarEventListener(componenteDiv);
+
+        const componentesSelect = componenteDiv.querySelector('.componentesSelect');
+        const cantidadSelect = componenteDiv.querySelector('.cantidadSelect');
+
+        componentesSelect.addEventListener('change', function() {
+            const selectedComponent = this.value;
+            if (selectedComponent) {
+                const maxCantidad = obtenerMaxCantidad(selectedComponent);
+                cantidadSelect.innerHTML = '';
+                for (let i = 1; i <= maxCantidad; i++) {
+                    cantidadSelect.innerHTML += `<option value="${i}">${i}</option>`;
+                }
+                cantidadSelect.removeAttribute('disabled');
+            } else {
+                cantidadSelect.innerHTML = '<option value="">Seleccione cantidad</option>';
+                cantidadSelect.setAttribute('disabled', 'disabled');
+            }
+        });
+    }
+    
+    function addEliminarEventListener(componenteDiv) {
+        const eliminarBoton = componenteDiv.querySelector('.eliminarComponente');
+        eliminarBoton.addEventListener('click', function() {
+            opcionesComponentes.removeChild(componenteDiv);
+        });
+    }
+
+    function obtenerMaxCantidad(componenteId) {
+        // Aquí debes proporcionar la lógica para obtener la cantidad máxima del componente desde Laravel
+        // Puedes hacer una consulta a tu base de datos u otra fuente de datos.
+        // Por ahora, se devolverá un valor fijo.
+        return 10;
+    }
+        
+        reservaSi.addEventListener('change', function() {
+            if (reservaSi.checked) {
+                opcionesComponentes.style.display = 'block';
+                reservaNo.checked = false;
+                agregarComponente.style.display = 'block';
+            }
+        });
+
+        reservaNo.addEventListener('change', function() {
+            if (reservaNo.checked) {
+                opcionesComponentes.style.display = 'none';
+                reservaSi.checked = false;
+                agregarComponente.style.display = 'none';
+            }
+        });
+    </script>
+    <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const blogSelect = document.getElementById("miSelect");
+        const placeSelect = document.getElementById("miSelect");
         const dateTimeSection = document.getElementById("date-time-section");
 
-        blogSelect.addEventListener("change", function () {
-            if (blogSelect.value !== "") {
+        placeSelect.addEventListener("change", function () {
+            if (placeSelect.value !== "") {
                 dateTimeSection.style.display = "block";
             } else {
                 dateTimeSection.style.display = "none";
@@ -107,9 +285,9 @@
         var miSelect = document.getElementById("miSelect");
         
         miSelect.addEventListener("change", function() {
-            var selectedBlogId = miSelect.value;
-            var url = "{{ route('blogs.events', ['blog' => ':blogId']) }}";
-            url = url.replace(':blogId', selectedBlogId);
+            var selectedPlaceId = miSelect.value;
+            var url = "{{ route('places.events', ['place' => ':placeId']) }}";
+            url = url.replace(':placeId', selectedPlaceId);
             
             // Realizar una solicitud AJAX para obtener los eventos
             fetch(url)

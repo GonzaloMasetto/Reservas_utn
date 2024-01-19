@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
-use App\Models\Blog;
+use App\Models\Place;
+use App\Models\TicComponent;
+use App\Models\TypeEvent;
 use Carbon\Carbon;
 
 
@@ -13,17 +15,20 @@ class EventController extends Controller
     
     function __construct()
     {
-         $this->middleware('permission:ver-event|crear-event|editar-event|borrar-event')->only('index');
+         $this->middleware('permission:ver-event|crear-event|editar-event|borrar-event|ver-eventconfirmados')->only('index');
          $this->middleware('permission:crear-event', ['only' => ['create','store']]);
          $this->middleware('permission:editar-event', ['only' => ['edit','update']]);
          $this->middleware('permission:borrar-event', ['only' => ['destroy']]);
+         $this->middleware('permission:ver-eventconfirmados')->only('confirmados');
+
     }
     public function index()
     {
         $events = Event::paginate(5);
         return view('events.index',compact('events'));
     }
-
+    
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -31,8 +36,10 @@ class EventController extends Controller
      */
     public function create()
     {
-        $blogs = Blog::paginate(5);
-        return view('events.crear', compact('blogs'));
+        $places = Place::paginate(5);
+        $typeEvents = TypeEvent::paginate(5);
+        $ticComponents = TicComponent::paginate(5);
+        return view('events.crear', compact('places', 'typeEvents','ticComponents'));
     }
 
     /**
@@ -46,10 +53,13 @@ class EventController extends Controller
         request()->validate([
             'event' => 'required',
             'contenido' => 'required',
-            'blog_id' => 'required',
+            'place_id' => 'required',
             'date' => 'required',
             'start_hour' => 'required',
             'end_hour' => 'required',
+            'typeEvent_id' => 'required',
+            'cant_personas' => 'required',
+            
         ]);
     
         // Calcula las fechas y horas de inicio y finalización
@@ -57,14 +67,34 @@ class EventController extends Controller
         $end_date = Carbon::createFromFormat('Y-m-d H:i', $request->date . ' ' . $request->end_hour);
     
         // Crea el evento con las fechas y horas calculadas
-        Event::create([
+        $event = Event::create([
             'event' => $request->event,
             'contenido' => $request->contenido,
-            'blog_id' => $request->blog_id,
+            'place_id' => $request->place_id,
+            'type_event_id' => $request->typeEvent_id,
             'start_date' => $start_date,
             'end_date' => $end_date,
+            'cant_personas' => $request->cant_personas, 
+            'video_conferencia' => $request->video_conferencia,
+            'difusion_redes' => $request->difusion_redes,
+            'transmision_youtube' => $request->transmision_youtube,
+            'catering' => $request->catering,
+            'otro' => $request->otro,
+            'adicional' => $request->adicional,
+            'state_id' => 2,
+            'user_id' => auth()->user()->id,
         ]);
-    
+
+        if ($request->opcionTic === 'si' && $request->has('ticComponent_id')) {
+            $ticComponents = $request->input('ticComponent_id');
+            $cantidades = $request->input('cantidad'); // Obtener las cantidades
+
+            foreach ($ticComponents as $index => $ticComponentId) {
+                $cantidad = $cantidades[$index];
+                $event->ticComponents()->attach($ticComponentId, ['cantidad' => $cantidad]);
+            }
+        }
+            
         return redirect()->route('events.index');
     }
 
@@ -102,7 +132,7 @@ class EventController extends Controller
         request()->validate([
             'event' => 'required',
             'contenido' => 'required',
-            'blog_id' => 'required',
+            'place_id' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
@@ -124,6 +154,23 @@ class EventController extends Controller
     
         return redirect()->route('events.index');
     }
-    
+    public function confirmados()
+    {    
+        $events = Event::where('state_id', 1)->paginate(5);
+        
+        return view('events.confirmados',compact('events'));
+    }
+    public function updateState(Request $request, Event $event)
+    {
+        $newStateId = $request->input('state_id');
+        
+        // Aquí puedes agregar validaciones y lógica adicional si es necesario
+        
+        $event->state_id = $newStateId;
+        $event->save();
+        
+        return redirect()->back()->with('success', 'Estado del evento actualizado exitosamente.');
+    }
+
     
 }

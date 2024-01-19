@@ -2075,7 +2075,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (cap.isios && self.haswrapper) {
             self.css($(doc.body), {
               '-webkit-transform': 'translate3d(0,0,0)'
-            }); // avoid iFrame content clipping - thanks to http://blog.derraab.com/2012/04/02/avoid-iframe-content-clipping-with-css-transform-on-ios/
+            }); // avoid iFrame content clipping - thanks to http://place.derraab.com/2012/04/02/avoid-iframe-content-clipping-with-css-transform-on-ios/
           }
 
           if ('contentWindow' in this) {

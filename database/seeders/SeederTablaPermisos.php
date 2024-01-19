@@ -24,23 +24,36 @@ class SeederTablaPermisos extends Seeder
             'editar-rol',
             'borrar-rol',
 
-            //Operacions sobre tabla blogs
-            'ver-blog',
-            'crear-blog',
-            'editar-blog',
-            'borrar-blog',
+            //Operacions sobre tabla places
+            'ver-place',
+            'crear-place',
+            'editar-place',
+            'borrar-place',
 
             //Operacions sobre tabla events
             'ver-event',
             'crear-event',
             'editar-event',
             'borrar-event',
+            'ver-eventconfirmados',
 
             //Operacions sobre tabla usuarios
             'ver-usuario',
             'crear-usuario',
             'editar-usuario',
-            'borrar-usuario'
+            'borrar-usuario',
+
+             //Operacions sobre tabla tipo de eventos
+             'ver-typeEvent',
+             'crear-typeEvent',
+             'editar-typeEvent',
+             'borrar-typeEvent',
+
+             //Operacions sobre tabla componentes de tic
+             'ver-ticComponent',
+             'crear-ticComponent',
+             'editar-ticComponent',
+             'borrar-ticComponent'
         ];
 
         foreach($permisos as $permiso) {
